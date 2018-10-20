@@ -17,6 +17,8 @@
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(TARGET_BOARD_PLATFORM),msm8998)
-  subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
-  $(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
+  ifneq ($(BOARD_USES_QCOM_HARDWARE),true)
+    subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
+    $(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
+  endif
 endif
